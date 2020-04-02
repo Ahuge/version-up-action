@@ -31,14 +31,19 @@ echo "## Login into git..."
 git config --global user.email "version_up_action@github.com"
 git config --global user.name "Version Up Action"
 
-echo "## Running Black Code Formatter"
+echo "## Running Version Up Action"
 TITLE=$(jq --raw-output '.pull_request.title' $GITHUB_EVENT_PATH);
+echo "Release title: ${TITLE}"
 PATTERN='[vV]([0-9]+\.[0-9]+\.[0-9]+)'
 [[ "${TITLE}" =~ ${PATTERN} ]]
 NEW_VERSION="${BASH_REMATCH[1]}"
+echo "New version number detected: ${NEW_VERSION}"
 PREVIOUS_VERSION=$(grep -Po '\d+\.\d+\.\d+' ${PREVIOUS_VERSION_FILE})
+echo "Previous version detected: ${PREVIOUS_VERSION} from ${PREVIOUS_VERSION_FILE}"
+echo "Searching for ${PREVIOUS_VERSION} in ${FILES_TO_UPDATE_VERSION}"
 for filepath in "${FILES_TO_UPDATE_VERSION[@]}"
 do
+    echo "Replacing ${PREVIOUS_VERSION} with ${NEW_VERSION} in ${filepath}"
     sed -i "s|${PREVIOUS_VERSION}|${NEW_VERSION}|g" ${filepath}
 done
 
