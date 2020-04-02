@@ -25,7 +25,5 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         PREVIOUS_VERSION_FILE: "setup.py"
-        FILES_TO_UPDATE_VERSION_FOR:
-            - "python/mymodule/__init__.py"
-            - "setup.py"
+        FILES_TO_UPDATE_VERSION_FOR: "python/mymodule/__init__.py setup.py"
 ```
