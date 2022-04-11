@@ -38,7 +38,7 @@ PATTERN='[vV]([0-9]+\.[0-9]+\.[0-9]+)'
 [[ "${TITLE}" =~ ${PATTERN} ]]
 NEW_VERSION="${BASH_REMATCH[1]}"
 echo "New version number detected: ${NEW_VERSION}"
-PREVIOUS_VERSION=$(grep -Po '\d+\.\d+\.\d+' ${PREVIOUS_VERSION_FILE})
+PREVIOUS_VERSION=$(grep -Po '\d+\.\d+\.\d+' ${PREVIOUS_VERSION_FILE} | head -n 1)
 echo "Previous version detected: ${PREVIOUS_VERSION} from ${PREVIOUS_VERSION_FILE}"
 echo "Searching for ${PREVIOUS_VERSION} in ${FILES_TO_UPDATE_VERSION_FOR}"
 for filepath in "${FILES_TO_UPDATE_VERSION_FOR[@]}"
