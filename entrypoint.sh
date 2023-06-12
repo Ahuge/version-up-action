@@ -30,6 +30,7 @@ git checkout $BRANCH
 echo "## Login into git..."
 git config --global user.email "version_up_action@github.com"
 git config --global user.name "VersionUpAction"
+git config --system --add safe.directory /github/workspace
 
 echo "## Running Version Up Action"
 TITLE=$(jq --raw-output '.pull_request.title' $GITHUB_EVENT_PATH);
