@@ -12,5 +12,5 @@ LABEL "maintainer"="Alex Hughes <ahughesalex@gmail.com>"
 RUN apt-get update && apt-get install -y git jq
 
 COPY entrypoint.sh /entrypoint.sh
-
+RUN git config --system --add safe.directory /github/workspace
 ENTRYPOINT ["/entrypoint.sh"]
